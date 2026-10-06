@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e8f4fb">
+<title>Silvia's Baby Shower</title>
+<style>
+:root{--ink:#34495a;--blue:#dceef7;--blue2:#b8d8e9;--cream:#fffaf0;--gold:#d9b45b;--pink:#f6e3e5;--line:#d7e5ec;--shadow:0 12px 34px #38566a18}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 8% 8%,#fff 0 2px,transparent 3px),radial-gradient(circle at 88% 20%,#fff 0 3px,transparent 4px),linear-gradient(160deg,#eaf6fb,#fffaf0 55%,#f7eceb);background-size:120px 120px,170px 170px,auto;min-height:100vh}button,a,input,select{font:inherit}button,a{touch-action:manipulation}a{color:inherit}.wrap{width:min(960px,100%);margin:auto;padding:clamp(14px,4vw,30px)}.hero{text-align:center;min-height:88svh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.75rem;color:#70899a}.hero h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(2.5rem,8vw,5rem);line-height:1.05;margin:.3em 0;color:#3e6278}.hero p{font-size:clamp(1rem,3.5vw,1.2rem);margin:.3rem auto 1rem;max-width:34rem}.star-button{width:clamp(150px,42vw,245px);aspect-ratio:1;border:0;background:transparent;cursor:pointer;padding:0;display:grid;place-items:center;filter:drop-shadow(0 12px 10px #647b8a22);animation:bob 3.5s ease-in-out infinite}.star-button img{width:100%;height:100%;object-fit:contain}.star-button:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #5a94b5;outline-offset:4px}.hint{font-size:.9rem;color:#718797;margin-top:1rem}.action{display:inline-flex;justify-content:center;align-items:center;gap:.5rem;border:0;border-radius:999px;background:#527f99;color:white;text-decoration:none;font-weight:700;padding:.85rem 1.2rem;min-height:46px;cursor:pointer;box-shadow:0 5px 14px #38566a20}.action.secondary{background:#fff;color:#42687e;border:1px solid var(--line);box-shadow:none}.action.gold{background:#b58e35}.action:active{transform:translateY(1px)}.hidden{display:none!important}.panel{background:#ffffffd9;border:1px solid #ffffff;border-radius:26px;padding:clamp(16px,4vw,30px);box-shadow:var(--shadow);backdrop-filter:blur(8px);margin:18px 0}.invite-image{display:block;width:min(100%,560px);height:auto;border-radius:14px;margin:0 auto 20px;box-shadow:0 8px 28px #34495a20}.center{text-align:center}.section-title{font-family:Georgia,serif;font-size:clamp(1.8rem,6vw,2.8rem);font-weight:500;text-align:center;margin:.25rem 0 .5rem;color:#3e6278}.sub{text-align:center;max-width:600px;margin:0 auto 22px;color:#647d8d;line-height:1.55}.registry-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.registry-link{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:20px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(145deg,#fff,#f3f9fc);text-decoration:none;min-height:150px}.registry-link strong{font-family:Georgia,serif;font-size:1.5rem}.registry-link span{font-size:.95rem;line-height:1.4;color:#637b8a}.registry-link .action{margin-top:auto;width:100%}.list-tools{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.list-tools input,.list-tools select,.add-form input,.add-form select{min-height:46px;border:1px solid #cbdde6;border-radius:13px;background:white;color:var(--ink);padding:10px 12px;min-width:0}.list-tools input{flex:1 1 180px}.list-tools select{flex:0 1 160px}.items{display:grid;gap:12px}.item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:17px;padding:13px}.item input[type=checkbox]{width:23px;height:23px;accent-color:#6e9bb2}.item-name{font-weight:700;overflow-wrap:anywhere}.item-meta{font-size:.84rem;color:#718797;margin-top:4px}.item.done .item-name{text-decoration:line-through;color:#8799a4}.item-actions{display:flex;gap:6px;align-items:center}.tiny{border:1px solid var(--line);background:#f8fbfc;border-radius:10px;padding:8px 10px;min-height:38px;cursor:pointer}.item-link{color:#477b99;font-size:.88rem;font-weight:700;text-decoration:none;white-space:nowrap}.add-form{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:9px;margin-top:18px}.empty{padding:22px;text-align:center;color:#718797;border:1px dashed #bdd3df;border-radius:15px}.note{font-size:.88rem;color:#718797;line-height:1.5;margin:14px 0 0}.footer{text-align:center;padding:24px 0 10px;color:#718797;font-size:.9rem}.toast{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:#34495a;color:white;padding:12px 18px;border-radius:999px;box-shadow:var(--shadow);z-index:20;max-width:90vw;text-align:center}.star-flight{position:fixed;z-index:30;pointer-events:none;width:150px;left:50%;top:42%;transform:translate(-50%,-50%);animation:fly 1.1s cubic-bezier(.22,.75,.23,1) forwards}.star-flight img{width:100%}@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}@keyframes fly{0%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0)}65%{opacity:1;transform:translate(-50%,-50%) scale(.65) rotate(160deg)}100%{opacity:0;transform:translate(-50%,-80%) scale(.2) rotate(300deg)}}
+@media(max-width:620px){.wrap{padding:12px}.hero{min-height:90svh}.registry-links{grid-template-columns:1fr}.registry-link{min-height:0}.add-form{grid-template-columns:1fr 1fr}.add-form input:first-child{grid-column:1/-1}.add-form .action{grid-column:1/-1}.item{grid-template-columns:auto minmax(0,1fr)}.item-actions{grid-column:2;justify-content:flex-start;flex-wrap:wrap}.item-link{white-space:normal}.panel{border-radius:21px}.list-tools select{flex:1 1 130px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero" id="cover" aria-label="Welcome">
+  <div class="eyebrow">A little star is on the way</div>
+  <h1>You're invited</h1>
+  <p>Come celebrate baby Silvia with us</p>
+  <button class="star-button" id="openInvite" aria-label="Open baby shower invitation"><img src="star-balloon.png" alt="Watercolor gold star balloon"></button>
+  <div class="hint">Tap the little star to open the invitation ✦</div>
+</section>
+<section id="invitation" class="hidden" aria-label="Baby shower invitation">
+  <div class="panel center">
+    <img class="invite-image" src="invitation.png" alt="Baby shower invitation for Silvia, October 18, 2026 at 1 PM">
+    <button class="action" id="toRegistry">View Baby Registry ✦</button>
+    <button class="action secondary" id="replay" style="margin-left:6px">↻ Replay opening</button>
+  </div>
+</section>
+<section id="registry" class="hidden" aria-label="Baby registry">
+  <div class="panel">
+    <div class="eyebrow center">For our little one</div>
+    <h2 class="section-title">Baby Registry</h2>
+    <p class="sub">Your love and support mean the world to us. Browse our registries below, or use the little gift list to keep track of ideas on this device.</p>
+    <div class="registry-links">
+      <a class="registry-link" href="https://www.target.com/gift-registry/gift/silvia-salazar" target="_blank" rel="noopener noreferrer"><strong>Target</strong><span>Browse Silvia's Target registry.</span><span class="action">Shop Target Registry ↗</span></a>
+      <a class="registry-link" href="https://www.amazon.com/baby-reg/silvia-salazar-december-2026-corning/3OTTGL85F9YWR?ref_=cm_sw_r_apann_dp_AQ0EA7CA1DDW1N9V8QG5&amp;language=en-US" target="_blank" rel="noopener noreferrer"><strong>Amazon</strong><span>Browse Silvia's Amazon baby registry.</span><span class="action gold">Shop Amazon Registry ↗</span></a>
+    </div>
+  </div>
+  <div class="panel">
+    <h2 class="section-title">Gift List ✦</h2>
+    <p class="sub">Add gift ideas, paste a product link, and tick items off as you go. This list saves on this phone/browser only; it does not change the official Target or Amazon registries.</p>
+    <div class="list-tools">
+      <input id="searchItems" type="search" placeholder="Search gift ideas…" aria-label="Search gift ideas">
+      <select id="filterItems" aria-label="Filter gift ideas"><option value="all">All items</option><option value="needed">Still needed</option><option value="done">Checked off</option></select>
+      <button class="action secondary" id="clearDone" type="button">Clear checked</button>
+    </div>
+    <div id="items" class="items" aria-live="polite"></div>
+    <form id="addForm" class="add-form">
+      <input id="itemName" required maxlength="120" placeholder="Gift idea (required)" aria-label="Gift idea">
+      <select id="itemCategory" aria-label="Gift category"><option>Nursery</option><option>Feeding</option><option>Diapering</option><option>Clothing</option><option>Bath & care</option><option>Toys & books</option><option>Other</option></select>
+      <input id="itemUrl" type="url" placeholder="Product link (optional)" aria-label="Product link, optional">
+      <button class="action" type="submit">＋ Add item</button>
+    </form>
+    <p class="note">Privacy note: your custom list is stored in this browser's local storage. Use the same browser/device to see it again. GitHub Pages is static hosting, so it cannot sync check-offs between different guests without a separate shared database.</p>
+  </div>
+  <div class="center"><button class="action secondary" id="backInvite">← Back to Invitation</button><button class="action secondary" id="backCover" style="margin-left:6px">↻ Start over</button></div>
+</section>
+<footer class="footer">Made with love for baby Silvia ✦</footer>
+</main>
+<div id="toast" class="toast hidden" role="status"></div>
+<script>
+(function(){
+ const cover=document.getElementById('cover'), invitation=document.getElementById('invitation'), registry=document.getElementById('registry');
+ const key='silviaBabyGiftList_v1'; let toastTimer;
+ function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.add('hidden'),2400)}
+ function view(which){cover.classList.toggle('hidden',which!=='cover');invitation.classList.toggle('hidden',which!=='invitation');registry.classList.toggle('hidden',which!=='registry');if(which!=='cover')setTimeout(()=>document.getElementById(which==='registry'?'registry':'invitation').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}),30);else window.scrollTo({top:0,behavior:'smooth'})}
+ function flyOpen(){const star=document.querySelector('.star-button img');if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const f=document.createElement('div');f.className='star-flight';const im=document.createElement('img');im.src=star.src;im.alt='';f.appendChild(im);document.body.appendChild(f);setTimeout(()=>f.remove(),1200)}view('invitation')}
+ document.getElementById('openInvite').addEventListener('click',flyOpen);
+ document.getElementById('replay').addEventListener('click',()=>{view('cover');window.setTimeout(flyOpen,180)});
+ document.getElementById('toRegistry').addEventListener('click',()=>view('registry'));
+ document.getElementById('backInvite').addEventListener('click',()=>view('invitation'));
+ document.getElementById('backCover').addEventListener('click',()=>view('cover'));
+ const starter=[]; let gifts=load();
+ function load(){try{const v=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(v)?v:starter.slice()}catch(e){return starter.slice()}}
+ function save(){try{localStorage.setItem(key,JSON.stringify(gifts))}catch(e){showToast('Could not save on this browser.')}}
+ function safeUrl(raw){try{const u=new URL(raw);return ['http:','https:'].includes(u.protocol)?u.href:null}catch(e){return null}}
+ function render(){const root=document.getElementById('items');root.replaceChildren();const q=document.getElementById('searchItems').value.trim().toLowerCase();const filter=document.getElementById('filterItems').value;const shown=gifts.filter(g=>(!q||(g.name+' '+g.category).toLowerCase().includes(q))&&(filter==='all'||(filter==='done'&&g.done)||(filter==='needed'&&!g.done)));if(!shown.length){const empty=document.createElement('div');empty.className='empty';empty.textContent=gifts.length?'No gift ideas match that filter yet.':'Your gift list is ready for ideas — add the first one below!';root.appendChild(empty);return}
+ shown.forEach(g=>{const row=document.createElement('div');row.className='item'+(g.done?' done':'');const check=document.createElement('input');check.type='checkbox';check.checked=!!g.done;check.setAttribute('aria-label','Mark '+g.name+' as checked off');check.addEventListener('change',()=>{g.done=check.checked;save();render()});const body=document.createElement('div');const name=document.createElement('div');name.className='item-name';name.textContent=g.name;const meta=document.createElement('div');meta.className='item-meta';meta.textContent=g.category||'Other';body.append(name,meta);const actions=document.createElement('div');actions.className='item-actions';if(g.url){const u=safeUrl(g.url);if(u){const link=document.createElement('a');link.className='item-link';link.href=u;link.target='_blank';link.rel='noopener noreferrer';link.textContent='View item ↗';actions.appendChild(link)}}const del=document.createElement('button');del.className='tiny';del.type='button';del.textContent='Remove';del.setAttribute('aria-label','Remove '+g.name);del.addEventListener('click',()=>{gifts=gifts.filter(x=>x.id!==g.id);save();render()});actions.appendChild(del);row.append(check,body,actions);root.appendChild(row)})}
+ document.getElementById('addForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('itemName').value.trim();const rawUrl=document.getElementById('itemUrl').value.trim();if(!name)return;let url='';if(rawUrl){const safe=safeUrl(rawUrl);if(!safe){showToast('Please enter a valid http or https product link.');return}url=safe}gifts.unshift({id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),name,category:document.getElementById('itemCategory').value,url,done:false});save();e.target.reset();document.getElementById('filterItems').value='all';document.getElementById('searchItems').value='';render();showToast('Gift idea added!')});
+ document.getElementById('searchItems').addEventListener('input',render);document.getElementById('filterItems').addEventListener('change',render);document.getElementById('clearDone').addEventListener('click',()=>{const n=gifts.filter(g=>g.done).length;if(!n){showToast('No checked items to clear.');return}gifts=gifts.filter(g=>!g.done);save();render();showToast('Checked items cleared.')});
+ render();
+})();
+</script>
+</body></html>
