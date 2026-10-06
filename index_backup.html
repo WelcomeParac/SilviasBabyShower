@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef8fb">
+  <title>Silvia's Baby Shower</title>
+  <style>
+    :root {
+      --ink: #214f63;
+      --sky: #eef8fb;
+      --cream: #fffdf8;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      background: var(--sky);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+    }
+
+    button {
+      font: inherit;
+      border: 0;
+      background: none;
+    }
+
+    .experience {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(126, 191, 216, .18), transparent 25%),
+        radial-gradient(circle at 85% 80%, rgba(126, 191, 216, .15), transparent 28%),
+        linear-gradient(135deg, #f8fcfd, #eaf6fa);
+    }
+
+    .front {
+      width: min(100%, 560px);
+      min-height: min(88vh, 820px);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      isolation: isolate;
+      transition: opacity .45s ease;
+    }
+
+    .front::before,
+    .front::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,.55);
+      filter: blur(1px);
+      z-index: -1;
+    }
+    .front::before { width: 280px; height: 280px; top: 7%; left: -8%; }
+    .front::after { width: 240px; height: 240px; bottom: 8%; right: -5%; }
+
+    .invite-label {
+      position: absolute;
+      top: 12%;
+      left: 0;
+      right: 0;
+      font-size: clamp(15px, 3vw, 20px);
+      letter-spacing: .34em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .hint {
+      position: absolute;
+      bottom: 9%;
+      left: 0;
+      right: 0;
+      font-size: 15px;
+      letter-spacing: .12em;
+      opacity: .72;
+    }
+
+    .star-button {
+      width: min(76vw, 390px);
+      aspect-ratio: 1 / .92;
+      cursor: pointer;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -52%);
+      transition:
+        transform 1.15s cubic-bezier(.2,.8,.2,1),
+        opacity .9s ease,
+        filter .8s ease;
+      z-index: 5;
+      touch-action: manipulation;
+    }
+
+    .star-button:focus-visible {
+      outline: 4px solid rgba(33,79,99,.35);
+      outline-offset: 12px;
+      border-radius: 50%;
+    }
+
+    .star-art {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 18px 18px rgba(50, 75, 82, .18));
+    }
+
+    .star-art {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .front-copy {
+      position: absolute;
+      bottom: 17%;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+    }
+
+    .front-copy h1 {
+      margin: 0;
+      font-size: clamp(42px, 10vw, 72px);
+      line-height: .95;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -.04em;
+    }
+
+    .front-copy p {
+      margin: 14px 0 0;
+      font-size: 13px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+
+    .invitation {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .8s ease;
+    }
+
+    .invitation img {
+      width: min(100vw, calc(100vh * 2 / 3));
+      height: auto;
+      max-height: 100vh;
+      display: block;
+      box-shadow: 0 16px 50px rgba(26, 60, 74, .15);
+    }
+
+    .balloon-overlay {
+      position: absolute;
+      width: min(38vw, calc(100vh * .25));
+      aspect-ratio: 1 / .98;
+      left: max(0px, calc((100vw - min(100vw, calc(100vh * 2 / 3))) / 2));
+      top: max(0px, calc((100vh - min(100vw, calc(100vh * 2 / 3)) * 1.5) / 2));
+      opacity: 0;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .balloon-overlay svg { width: 100%; height: 100%; }
+
+    .shown .front { opacity: 0; pointer-events: none; }
+    .shown .invitation { opacity: 1; visibility: visible; }
+    .shown .star-button {
+      pointer-events: none;
+      animation: starJourney 1.65s cubic-bezier(.2,.78,.16,1) forwards;
+    }
+
+    .shown .invitation {
+      animation: invitationReveal 1.55s cubic-bezier(.2,.75,.2,1) .48s both;
+    }
+
+    .shown .front::before, .shown .front::after {
+      animation: softBurst 1.3s ease-out both;
+    }
+
+    @keyframes starJourney {
+      0% { transform: translate(-50%, -52%) scale(1) rotate(0deg); opacity: 1; filter: drop-shadow(0 18px 18px rgba(50,75,82,.18)); }
+      12% { transform: translate(-50%, -58%) scale(1.08) rotate(-3deg); opacity: 1; filter: drop-shadow(0 28px 26px rgba(50,75,82,.20)); }
+      42% { transform: translate(calc(-50% + var(--move-x-mid)), calc(-52% + var(--move-y-mid))) scale(.86) rotate(7deg); opacity: 1; }
+      72% { transform: translate(calc(-50% + var(--move-x-near)), calc(-52% + var(--move-y-near))) scale(.66) rotate(-4deg); opacity: .96; }
+      91% { transform: translate(calc(-50% + var(--move-x)), calc(-52% + var(--move-y))) scale(var(--land-scale)) rotate(1deg); opacity: .9; }
+      100% { transform: translate(calc(-50% + var(--move-x)), calc(-52% + var(--move-y))) scale(calc(var(--land-scale) * .72)) rotate(0deg); opacity: 0; }
+    }
+
+    @keyframes invitationReveal {
+      0% { opacity: 0; transform: scale(1.025); }
+      55% { opacity: 1; transform: scale(1.006); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes softBurst {
+      0% { opacity: 0; transform: scale(.72); }
+      45% { opacity: .8; transform: scale(1.05); }
+      100% { opacity: 0; transform: scale(1.25); }
+    }
+
+    .shown::after {
+      content: ""; position: absolute; left: var(--move-x); top: var(--move-y); width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,.9); border-radius: 50%; pointer-events: none; opacity: 0;
+      animation: landingRing .85s ease-out 1.08s both;
+      box-shadow: 0 0 0 8px rgba(255,255,255,.18), 0 0 30px rgba(255,191,75,.45);
+    }
+    @keyframes landingRing { 0% { opacity: .8; transform: scale(.4); } 100% { opacity: 0; transform: scale(6); } }
+
+    .replay {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 20;
+      display: none;
+      padding: 11px 15px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.9);
+      color: var(--ink);
+      box-shadow: 0 6px 20px rgba(33,79,99,.16);
+      cursor: pointer;
+      font-size: 13px;
+      letter-spacing: .08em;
+    }
+
+    .shown .replay { display: block; }
+
+    .invitation-card {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 12px 12px 18px;
+    }
+
+    .invitation-card > img {
+      width: min(100vw, calc(100vh * 2 / 3));
+      max-height: calc(100vh - 92px);
+      height: auto;
+      object-fit: contain;
+      box-shadow: 0 16px 50px rgba(26, 60, 74, .15);
+    }
+
+    .invitation-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .registry-link, .back-link {
+      padding: 11px 17px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.94);
+      color: var(--ink);
+      box-shadow: 0 7px 22px rgba(33,79,99,.14);
+      cursor: pointer;
+      font-size: 13px;
+      letter-spacing: .07em;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .registry-link:hover, .back-link:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(33,79,99,.18); }
+
+    .invitation .replay {
+      position: static;
+      display: inline-block;
+    }
+
+    .registry {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      overflow-y: auto;
+      background:
+        radial-gradient(circle at 10% 12%, rgba(126,191,216,.18), transparent 24%),
+        radial-gradient(circle at 90% 76%, rgba(126,191,216,.15), transparent 27%),
+        linear-gradient(135deg, #f4fbfd, #fffefa 48%, #eaf6fa);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(24px);
+      transition: opacity .55s ease, transform .55s ease, visibility 0s linear .55s;
+    }
+
+    .registry.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+      transition: opacity .55s ease, transform .55s ease, visibility 0s;
+    }
+
+    .registry-inner {
+      width: min(100%, 900px);
+      margin: 0 auto;
+      min-height: 100%;
+      padding: 18px 18px 46px;
+      position: relative;
+    }
+
+    .back-link { margin: 0 0 8px; }
+
+    .registry-hero {
+      text-align: center;
+      padding: 0 10px 8px;
+    }
+    .registry-hero img {
+      width: 135px;
+      height: 128px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto -3px;
+      filter: drop-shadow(0 10px 10px rgba(35,74,88,.13));
+    }
+    .registry-kicker {
+      margin: 0 0 4px;
+      text-transform: uppercase;
+      letter-spacing: .25em;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .registry-hero h2 {
+      margin: 0;
+      font-size: clamp(45px, 9vw, 76px);
+      line-height: .9;
+      font-weight: 400;
+      font-style: italic;
+    }
+    .registry-hero p:last-child {
+      margin: 17px auto 20px;
+      max-width: 610px;
+      font-size: 17px;
+      line-height: 1.55;
+      color: #386b80;
+    }
+
+    .registry-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .registry-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(36,84,106,.18);
+      border-radius: 28px;
+      background: rgba(255,255,255,.80);
+      box-shadow: 0 14px 35px rgba(34,75,90,.10);
+      padding: 25px 22px 23px;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .registry-card::before {
+      content: ""; position: absolute; inset: 0 0 auto; height: 7px;
+      background: linear-gradient(90deg,#c8e5f1,#f3d99e,#c8e5f1);
+    }
+    .registry-badge {
+      width: 76px; height: 76px; border-radius: 50%; margin: 2px auto 15px;
+      display: grid; place-items: center;
+      background: #e7f4f8; border: 1px solid rgba(36,84,106,.14); font-size: 34px;
+    }
+    .registry-card h3 { margin: 0; font-size: 28px; font-weight: 400; font-style: italic; }
+    .registry-card p { margin: 9px 0 20px; color: #386b80; font-size: 15px; line-height: 1.45; }
+    .registry-cta {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px;
+      border-radius: 999px; color: white; background: var(--ink); text-decoration: none;
+      letter-spacing: .06em; font-size: 14px; font-weight: 700;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .registry-cta:hover { transform: translateY(-2px); box-shadow: 0 9px 20px rgba(36,84,106,.18); background: #183f50; }
+    .registry-note {
+      margin: 22px auto 0; max-width: 700px; padding: 17px 20px; border-radius: 22px;
+      background: rgba(218,238,246,.65); border: 1px solid rgba(36,84,106,.10);
+      text-align: center; font-size: 14px; line-height: 1.5;
+    }
+    .registry-footer { text-align: center; margin-top: 28px; font-style: italic; font-size: 17px; color: #386b80; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .star-button, .front, .invitation { transition-duration: .01ms; }
+      .shown .balloon-overlay { animation: none; opacity: 0; }
+    }
+
+    @media (max-width: 520px) {
+      .experience { padding: 0; }
+      .front { min-height: 100vh; }
+      .hint { bottom: 7%; }
+      .invite-label { top: 9%; }
+      .invitation-card { padding: 8px 8px 12px; gap: 8px; }
+      .invitation-card > img { max-height: calc(100vh - 82px); }
+      .registry-grid { grid-template-columns: 1fr; }
+      .registry-inner { padding-left: 14px; padding-right: 14px; }
+      .registry-hero img { width: 120px; height: 115px; }
+      .registry-hero p:last-child { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="experience" id="experience">
+    <section class="front" aria-label="Invitation cover">
+      <div class="invite-label">You’re invited</div>
+
+      <button class="star-button" id="starButton" aria-label="Open Silvia's baby shower invitation">
+        <img class="star-art" src="star-balloon.png" alt="">
+      </button>
+
+      <div class="front-copy">
+        <h1>Baby Shower</h1>
+        <p>Tap the star to open</p>
+      </div>
+
+      <div class="hint">A special invitation for Silvia</div>
+    </section>
+
+    <section class="invitation" aria-label="Baby shower invitation">
+      <div class="invitation-card">
+        <img src="invitation.png" alt="Baby shower invitation for Silvia, October 18, 2026 at 1 PM">
+        <div class="invitation-actions">
+          <button class="registry-link" id="registryLink" type="button">View Baby Registry ✦</button>
+          <button class="replay" id="replay" type="button">Replay</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="registry" id="registry" aria-label="Baby registry">
+      <div class="registry-inner">
+        <button class="back-link" id="backToInvitation" type="button">← Back to invitation</button>
+        <div class="registry-hero">
+          <img src="star-balloon.png" alt="">
+          <p class="registry-kicker">For Baby Silvia</p>
+          <h2>Baby Registry</h2>
+          <p>Your love and support mean the world to us. If you'd like to celebrate Silvia with a gift, we've made it easy to shop her registries below.</p>
+        </div>
+        <div class="registry-grid">
+          <article class="registry-card">
+            <div class="registry-badge">🎁</div>
+            <h3>Target</h3>
+            <p>Shop Silvia's baby registry and choose a gift for the little one.</p>
+            <a class="registry-cta" href="https://www.target.com/gift-registry/gift/silvia-salazar" target="_blank" rel="noopener noreferrer">Shop Target Registry</a>
+          </article>
+          <article class="registry-card">
+            <div class="registry-badge">🍼</div>
+            <h3>Amazon</h3>
+            <p>Browse Silvia's Amazon baby registry and find something special.</p>
+            <a class="registry-cta" href="https://www.amazon.com/baby-reg/silvia-salazar-december-2026-corning/3OTTGL85F9YWR?ref_=cm_sw_r_apann_dp_AQ0EA7CA1DDW1N9V8QG5&amp;language=en-US" target="_blank" rel="noopener noreferrer">Shop Amazon Registry</a>
+          </article>
+        </div>
+        <div class="registry-note"><strong>A little note:</strong> There is absolutely no pressure to bring a gift. Celebrating with us is what matters most. 💙</div>
+        <div class="registry-footer">With love, Silvia's family ✦</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const root = document.getElementById('experience');
+      const star = document.getElementById('starButton');
+      const replay = document.getElementById('replay');
+      const registry = document.getElementById('registry');
+      const registryLink = document.getElementById('registryLink');
+      const backToInvitation = document.getElementById('backToInvitation');
+
+      function openInvitation() {
+        // The supplied invitation is 1024x1536. The large gold star occupies
+        // roughly the upper-left 38% of the invitation width.
+        const image = document.querySelector('.invitation img');
+        const rect = image.getBoundingClientRect();
+        const starRect = star.getBoundingClientRect();
+
+        // Target the center of the star printed on the invitation.
+        const targetX = rect.left + rect.width * 0.19;
+        const targetY = rect.top + rect.height * 0.145;
+        const startX = starRect.left + starRect.width / 2;
+        const startY = starRect.top + starRect.height / 2;
+
+        // Match the printed star's approximate width before fading out.
+        const targetWidth = rect.width * 0.37;
+        const landScale = Math.max(0.25, Math.min(0.9, targetWidth / starRect.width));
+        const dx = targetX - startX;
+        const dy = targetY - startY;
+        root.style.setProperty('--move-x', `${dx}px`);
+        root.style.setProperty('--move-y', `${dy}px`);
+        root.style.setProperty('--move-x-mid', `${dx * .43}px`);
+        root.style.setProperty('--move-y-mid', `${dy * .34 - Math.min(90, Math.abs(dy) * .08)}px`);
+        root.style.setProperty('--move-x-near', `${dx * .78}px`);
+        root.style.setProperty('--move-y-near', `${dy * .78 - Math.min(35, Math.abs(dy) * .035)}px`);
+        root.style.setProperty('--land-scale', `${landScale}`);
+        root.classList.add('shown');
+        setTimeout(() => replay.focus({preventScroll: true}), 1450);
+      }
+
+      function resetInvitation() {
+        root.classList.remove('shown');
+        root.style.removeProperty('--move-x');
+        root.style.removeProperty('--move-y');
+        root.style.removeProperty('--move-x-mid');
+        root.style.removeProperty('--move-y-mid');
+        root.style.removeProperty('--move-x-near');
+        root.style.removeProperty('--move-y-near');
+        root.style.removeProperty('--land-scale');
+        star.focus({preventScroll: true});
+      }
+
+      function openRegistry() {
+        registry.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => backToInvitation.focus({preventScroll: true}), 550);
+      }
+
+      function closeRegistry() {
+        registry.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => registryLink.focus({preventScroll: true}), 550);
+      }
+
+      star.addEventListener('click', openInvitation);
+      replay.addEventListener('click', resetInvitation);
+      registryLink.addEventListener('click', openRegistry);
+      backToInvitation.addEventListener('click', closeRegistry);
+    })();
+  </script>
+</body>
+</html>
